@@ -18,7 +18,7 @@ import click
 
 @click.command()
 @click.argument("model_name")
-@click.option("--max-depth", default=3, help="Maximum depth of dependencies.")
+@click.option("--max-depth", default=2, help="Maximum depth of dependencies.")
 @click.option("--output", default="test.html", help="Output HTML file path.")
 @click.option("--model-dir-name", default="models", help="Model folder name")
 @click.option("--data-dir-name", default="data", help="Data folder name")
