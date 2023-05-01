@@ -1,6 +1,6 @@
 # DBT Dependency Viewer
 
-DBT Dependency Viewer is a command-line tool for visualizing the upstream and
+DBT Lineage Viewer is a command-line tool for visualizing the upstream and
 downstream dependencies of a specified DBT model within a DBT project. It
 generates an HTML file containing a diagram of the dependency tree.
 
@@ -9,7 +9,7 @@ generates an HTML file containing a diagram of the dependency tree.
 Install the package using pip:
 
 ```bash
-pip install dbt_dependency_viewer
+pip install dbt-lineage-viewer
 ```
 
 ## Usage
@@ -17,8 +17,7 @@ To use the DBT Dependency Viewer, please navigate into your dbt project folder
 and run the following command:
 
 ```bash
-dbt_dependency_viewer <model_name> --max-depth <max_depth> --output
-<output_file>
+dbt-lineage-viewer <model_name> --max-depth <max_depth> --output <output_file>
 ```
 Replace `<model_name>` with the name of the DBT model you want to analyze,
 `<max_depth>` with the maximum depth for the dependency tree, and
@@ -34,6 +33,5 @@ Analyze the tbl_acquisition_funnel model with a maximum depth of 3, and
 generate an output HTML file named dependency_tree.html:
 
 ```bash
-dbt_dependency_viewer tbl_acquisition_funnel --max-depth 3 --output
-dependency_tree.html
+dbt-lineage-viewer tbl_acquisition_funnel --max-depth 3 --output dependency_tree.html
 ```
