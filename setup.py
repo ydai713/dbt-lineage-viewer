@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="dbt_lineage_viewer",
-    version="0.2",
+    version="1.0.1",
     author="Yang Dai",
     author_email="yang.dai2020@gmail.com",
     description="A DBT lineage viewer",
@@ -20,7 +20,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "dbt-lineage-viewer=main:main",
+            "dbt-lineage-viewer=dbt_lineage_viewer:main",
         ],
     },
 )

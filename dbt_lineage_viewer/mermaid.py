@@ -21,6 +21,10 @@ def generate_mermaid_code(
                 mentioned_nodes.add(key)
             if edge not in visited_edges:
                 visited_edges.add(edge)
+                # this is a bug from mermaid (click is a mermaid keyword)
+                key = key.replace("click", "Click")
+                parent = parent.replace("click", "Click")
+
                 code += (
                     f"{key} --> {parent}\n" if not downstream 
                     else f"{parent} --> {key}\n"

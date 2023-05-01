@@ -76,11 +76,11 @@ def generate_downstream_tree(
     parent_model_name: str,
     all_models: Dict[str, str],
     current_depth: int = 0,
-    max_depth: Optional[int] = None
+    max_depth: int = 0
 ) -> Dict[str, Dict]:
     children = {}
 
-    if max_depth is not None and current_depth >= max_depth:
+    if max_depth != 0 and current_depth >= max_depth:
         return children
 
     for model_name, model_content in all_models.items():
@@ -99,11 +99,11 @@ def generate_upstream_tree(
     child_model_name: str,
     all_models: Dict[str, str],
     current_depth: int = 0,
-    max_depth: Optional[int] = None
+    max_depth: int = 0
 ) -> Dict[str, Dict]:
     parents = {}
 
-    if max_depth is not None and current_depth >= max_depth:
+    if max_depth != 0 and current_depth >= max_depth:
         return parents
 
     # use regular expression to find parten model_name in all_models
@@ -118,7 +118,7 @@ def generate_upstream_tree(
                     max_depth=max_depth
                 )
             except KeyError:
-                print("warning: you might have a dynamic dependency")
+                print(f"Warning: {model_name} is dynamically generated")
         elif model_type == "source":
             parents[model_name] = {}
 
