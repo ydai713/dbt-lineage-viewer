@@ -5,14 +5,10 @@ It purely uses the model files in the project directory and does not rely on
 the dbt manifest.json file, which means it does not need to run `dbt compile`
 first.
 """
-import os
 import re
 from typing import Dict, Optional
 from pathlib import Path
 from itertools import chain
-
-
-os.chdir("/home/yang/Code/Klaviyo/company/klaviyo-bi-scripts/src/dbt/")
 
 
 def main():
@@ -38,8 +34,8 @@ def main():
     )
     upstream_tree = { model_name: upstream_models }
 
-    downstream_chart = dict_to_mermaid_chart(downstream_tree, downstream=True)
-    upstream_chart = dict_to_mermaid_chart(upstream_tree, downstream=False)
+    downstream_chart = generate_mermaid_code(downstream_tree, downstream=True)
+    upstream_chart = generate_mermaid_code(upstream_tree, downstream=False)
 
     chart = f"""
         flowchart LR
@@ -166,11 +162,11 @@ def generate_upstream_tree(
     return parents
 
 
-def dict_to_mermaid_chart(
+def generate_mermaid_code(
     d: Dict[str, Dict], 
     parent=None,
-    mentioned_nodes=None,
-    visited_edges=None,
+    mentioned_nodes=set(),
+    visited_edges=set(),
     downstream: bool = False
 ) -> str:
     chart = ""
@@ -191,7 +187,7 @@ def dict_to_mermaid_chart(
                     else f"{parent} --> {key}\n"
                 )
         if value:
-            chart += dict_to_mermaid_chart(
+            chart += generate_mermaid_code(
                 value, 
                 key,
                 mentioned_nodes,
