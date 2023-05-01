@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="dbt-lineage-viewer",
+    name="dbt_lineage_viewer",
     version="0.1",
     author="Yang Dai",
     author_email="yang.dai2020@gmail.com",
@@ -18,8 +18,9 @@ setup(
     install_requires=[
         "click",
     ],
-    entry_points="""
-        [console_scripts]
-        dbt-lineage-viewer=dbt-lineage-viewer:main
-    """,
+    entry_points={
+        "console_scripts": [
+            "dbt-lineage-viewer=main:main",
+        ],
+    },
 )
