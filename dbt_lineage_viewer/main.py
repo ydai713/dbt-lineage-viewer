@@ -27,7 +27,7 @@ import click
 @click.option("--snapshot-dir-name", default="snapshots", help="Snapshots folder name")
 @click.option("--upstream-only", is_flag=True, help="Show upstream models only.")
 @click.option("--downstream-only", is_flag=True, help="Show downstream models only.")
-@click.option("--mermaid-code-only", is_flag=False, help="Show mermaid code only.")
+@click.option("--mermaid-code-only", is_flag=True, help="Show mermaid code only.")
 def main(
     model_name: str,
     max_depth: int,
