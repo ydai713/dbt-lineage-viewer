@@ -21,12 +21,13 @@ import click
 @click.command()
 @click.argument("model_name")
 @click.option("--max-depth", default=0, help="Maximum depth of dependencies.")
-@click.option("--output", default="test.html", help="Output HTML file path.")
+@click.option("--output", default="test.html", help="Output file path.")
 @click.option("--model-dir-name", default="models", help="Model folder name")
 @click.option("--data-dir-name", default="data", help="Data folder name")
 @click.option("--snapshot-dir-name", default="snapshots", help="Snapshots folder name")
 @click.option("--upstream-only", is_flag=True, help="Show upstream models only.")
 @click.option("--downstream-only", is_flag=True, help="Show downstream models only.")
+@click.option("--mermaid-code-only", is_flag=False, help="Show mermaid code only.")
 def main(
     model_name: str,
     max_depth: int,
@@ -35,7 +36,8 @@ def main(
     data_dir_name: str,
     snapshot_dir_name,
     upstream_only: bool,
-    downstream_only: bool
+    downstream_only: bool,
+    mermaid_code_only: bool,
 
 ):
     if upstream_only and downstream_only:
@@ -78,6 +80,10 @@ def main(
         {downstream_chart}
         {upstream_chart}
     """
+    if mermaid_code_only:
+        with open(output, "w") as fout:
+            fout.write(mermaid_code)
+        exit(0)
 
     # Wrap mermaid code with html and output it so can be displayed
     # in local browser

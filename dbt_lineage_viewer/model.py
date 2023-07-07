@@ -38,7 +38,11 @@ def get_all_models(
     result = {}
     for model in all_models: 
         model_name = model.name.split(".")[0]
-        model_content = model.read_text() if model.suffix == ".sql" else ""
+        model_content = (
+            model.read_text()
+            if model.suffix == ".sql" or model.suffix == ".py"
+            else ""
+        )
         result[model_name] = model_content
     return result
 
